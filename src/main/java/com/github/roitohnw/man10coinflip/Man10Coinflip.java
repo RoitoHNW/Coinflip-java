@@ -220,7 +220,6 @@ public final class Man10Coinflip extends JavaPlugin {
                         e.printStackTrace();
                     }
                 }
-                //どっちが予想をあてたのか表示する
                 if (maincoin == change) {
                     if (change) {
                         sender.sendMessage(Component.text("§6§l[CF]" + player.getName() + "が表の予想を当てました！"));
