@@ -1,0 +1,9 @@
+name: Man10Coinflip
+version: @version@
+main: com.github.roitohnw.man10coinflip.Man10Coinflip
+api-version: 1.16
+authors: [ roitohnw ]
+depend: [Vault]
+description: Man10Coinflip
+commands:
+  cf:
