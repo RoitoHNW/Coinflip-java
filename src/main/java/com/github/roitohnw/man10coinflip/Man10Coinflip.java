@@ -124,7 +124,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 sender.sendMessage("§e§l[CF]プレイヤーが存在しない、またはオフラインです");
                 return true;
             }
-            if (!coindata.containsKey(((Player) sender).getUniqueId())) {
+            if (!coindata.containsKey(player.getUniqueId())) {
                 sender.sendMessage("§e§l[CF]その部屋は存在しません");
                 return true;
             }
