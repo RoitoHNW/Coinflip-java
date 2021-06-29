@@ -244,11 +244,6 @@ public final class Man10Coinflip extends JavaPlugin {
                     }
 
                 }
-                for (int i = 11;i<16;i+=4) {
-                    inv.setItem(i, new ItemStack(Material.PINK_STAINED_GLASS_PANE));
-                    inv.setItem(i + 9, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
-                    inv.setItem(i + 18, new ItemStack(Material.LIME_STAINED_GLASS_PANE));
-                }
 
                 if (maincoin == change) {
                     if (change) {
@@ -286,16 +281,20 @@ public final class Man10Coinflip extends JavaPlugin {
                     inv.setItem(13, head);
                     vault.deposit(((Player)sender), bet * 2);
                 }
-
-
+                for (int i = 11;i<16;i+=4) {
+                    inv.setItem(i, new ItemStack(Material.PINK_STAINED_GLASS_PANE));
+                    inv.setItem(i + 9, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
+                    inv.setItem(i + 18, new ItemStack(Material.LIME_STAINED_GLASS_PANE));
+                }
+                try {
+                    sleep(2500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Bukkit.getScheduler().runTask(this, new Runnable (){
                     @Override
                     public void run(){
-                        try {
-                            sleep(5000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+
                         ((Player) sender).closeInventory();
                         player.closeInventory();
                     }
