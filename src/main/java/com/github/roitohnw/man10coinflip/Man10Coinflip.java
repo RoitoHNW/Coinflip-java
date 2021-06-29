@@ -1,6 +1,8 @@
 package com.github.roitohnw.man10coinflip;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Server;
@@ -89,7 +91,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 coindata.put(((Player)sender).getUniqueId(),new GameData(Double.parseDouble(args[1]),true));
                 new Thread(() -> {
                     for (int i=0;i<30;i++) {
-                        if (i % 10 == 0) Bukkit.broadcast(Component.text("§6§l[CF]" + sender.getName() + "が表予想で" + bet + "円コインフリップを開いてます！\n裏だと思う人は参加してみよう"), Server.BROADCAST_CHANNEL_USERS);
+                        if (i % 10 == 0) sendHoverText("§6§l[CF]" + sender.getName() + "が表予想で" + bet +"円コインフリップを開いています！\n裏だと思う人は参加してみよう","§bまたはここをクリック！","/cf join " + sender.getName());
                         try {
                             sleep(1000);
                         } catch (InterruptedException e) {
@@ -110,7 +112,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 coindata.put(((Player)sender).getUniqueId(),new GameData(Double.parseDouble(args[1]),false));
                 new Thread(() -> {
                     for (int i=0;i<30;i++) {
-                        if (i % 10 == 0) Bukkit.broadcast(Component.text("§6§l[CF]" + sender.getName() + "が裏予想で" + bet + "円コインフリップを開いてます！\n表だと思う人は参加してみよう"), Server.BROADCAST_CHANNEL_USERS);
+                        if (i % 10 == 0) sendHoverText("§6§l[CF]" + sender.getName() + "が裏予想で" + bet +"円コインフリップを開いています！\n表だと思う人は参加してみよう","§bまたはここをクリック！","/cf join " + sender.getName());
                         try {
                             sleep(1000);
                         } catch (InterruptedException e) {
@@ -240,6 +242,12 @@ public final class Man10Coinflip extends JavaPlugin {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
+                }
+                for (int i = 11;i<16;i+=4) {
+                    inv.setItem(i, new ItemStack(Material.PINK_STAINED_GLASS_PANE));
+                    inv.setItem(i + 9, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
+                    inv.setItem(i + 18, new ItemStack(Material.LIME_STAINED_GLASS_PANE));
                 }
 
                 if (maincoin == change) {
@@ -279,6 +287,7 @@ public final class Man10Coinflip extends JavaPlugin {
                     vault.deposit(((Player)sender), bet * 2);
                 }
 
+
                 Bukkit.getScheduler().runTask(this, new Runnable (){
                     @Override
                     public void run(){
@@ -306,6 +315,10 @@ public final class Man10Coinflip extends JavaPlugin {
             );
         }
         return true;
+    }
+    private void  sendHoverText(String msg,String hover,String cmd) {
+        Component message = Component.text(msg).hoverEvent(HoverEvent.showText(Component.text(hover))).clickEvent(ClickEvent.runCommand(cmd));
+        Bukkit.broadcast(message, Server.BROADCAST_CHANNEL_USERS);
     }
 }
 
