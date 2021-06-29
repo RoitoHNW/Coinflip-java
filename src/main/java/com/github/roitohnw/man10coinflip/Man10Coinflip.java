@@ -91,7 +91,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 coindata.put(((Player)sender).getUniqueId(),new GameData(Double.parseDouble(args[1]),true));
                 new Thread(() -> {
                     for (int i=0;i<30;i++) {
-                        if (i % 10 == 0) sendHoverText("§6§l[CF]" + sender.getName() + "が表予想で" + bet +"円コインフリップを開いています！\n裏だと思う人は参加してみよう","§bまたはここをクリック！","/cf join " + sender.getName());
+                        if (i % 10 == 0) sendHoverText("§6§l[CF]" + sender.getName() + "が表予想で" + bet +"円コインフリップを開いています！\n裏だと思う人は/cf join" + sender.getName() + "で参加してみよう","§bまたはここをクリック！","/cf join " + sender.getName());
                         try {
                             sleep(1000);
                         } catch (InterruptedException e) {
@@ -112,7 +112,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 coindata.put(((Player)sender).getUniqueId(),new GameData(Double.parseDouble(args[1]),false));
                 new Thread(() -> {
                     for (int i=0;i<30;i++) {
-                        if (i % 10 == 0) sendHoverText("§6§l[CF]" + sender.getName() + "が裏予想で" + bet +"円コインフリップを開いています！\n表だと思う人は参加してみよう","§bまたはここをクリック！","/cf join " + sender.getName());
+                        if (i % 10 == 0) sendHoverText("§6§l[CF]" + sender.getName() + "が裏予想で" + bet +"円コインフリップを開いています！\n表だと思う人は/cf join" + sender.getName() + "で参加してみよう","§bまたはここをクリック！","/cf join " + sender.getName());
                         try {
                             sleep(1000);
                         } catch (InterruptedException e) {
