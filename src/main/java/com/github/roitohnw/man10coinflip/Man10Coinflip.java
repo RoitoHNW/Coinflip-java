@@ -24,6 +24,18 @@ import static java.lang.Thread.sleep;
 
 public final class Man10Coinflip extends JavaPlugin {
 
+    private Material panelColor(){
+        Random random=new Random();
+        int d=random.nextInt(3);
+        if(d==0){
+            return Material.PINK_STAINED_GLASS_PANE;
+        }
+        else if(d==1){
+            return Material.WHITE_STAINED_GLASS_PANE;
+        }
+        else return Material.LIME_STAINED_GLASS_PANE;
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -115,6 +127,7 @@ public final class Man10Coinflip extends JavaPlugin {
             }
         }
         if (args[0].equals("join")){
+
             if (args.length !=2) {
                 sender.sendMessage(Component.text("§e§l[CF]使い方が間違ってます"));
                 return true;
@@ -177,13 +190,11 @@ public final class Man10Coinflip extends JavaPlugin {
                 ItemStack headsitem = new ItemStack(Material.IRON_NUGGET);
                 ItemMeta headsmeta = headsitem.getItemMeta();
                 headsmeta.setCustomModelData(heads);
-                //プレイヤーの予想コイン
                 headsmeta.displayName(Component.text("§a§l予想：表"));
                 headsitem.setItemMeta(headsmeta);
                 ItemStack tailsitem = new ItemStack(Material.IRON_NUGGET);
                 ItemMeta tailsmeta = tailsitem.getItemMeta();
                 tailsmeta.setCustomModelData(tails);
-                //プレイヤーの予想コイン
                 tailsmeta.displayName(Component.text("§b§l予想：裏"));
                 tailsitem.setItemMeta(tailsmeta);
                 ItemStack item = new ItemStack(Material.IRON_NUGGET);
@@ -196,10 +207,12 @@ public final class Man10Coinflip extends JavaPlugin {
                     inv.setItem(16, headsitem);
                     inv.setItem(28, tailsitem);
                 }
+
                 else {
                     inv.setItem(16, tailsitem);
                     inv.setItem(28, headsitem);
                 }
+
                 for (int i = 0; i<new Random().nextInt(14)+10; i++) {
                     player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_SHOOT, 0.5f, 1f);
                     item = inv.getItem(22);
@@ -208,10 +221,18 @@ public final class Man10Coinflip extends JavaPlugin {
                         meta.setCustomModelData(heads);
                         meta.displayName(Component.text("§a§l表"));
                     }
+
                     else {
                         meta.setCustomModelData(tails);
                         meta.displayName(Component.text("§b§l裏"));
                     }
+
+                    for (int t = 11;t<16;t+=4) {
+                        inv.setItem(t, new ItemStack(panelColor()));
+                        inv.setItem(t + 9, new ItemStack(panelColor()));
+                        inv.setItem(t + 18, new ItemStack(panelColor()));
+                    }
+
                     item.setItemMeta(meta);
                     change = !change;
                     try {
@@ -220,6 +241,7 @@ public final class Man10Coinflip extends JavaPlugin {
                         e.printStackTrace();
                     }
                 }
+
                 if (maincoin == change) {
                     if (change) {
                         sender.sendMessage(Component.text("§6§l[CF]" + player.getName() + "が表の予想を当てました！"));
@@ -242,10 +264,12 @@ public final class Man10Coinflip extends JavaPlugin {
                         sender.sendMessage(Component.text("§6§l[CF]" + sender.getName() + "が表の予想を当てました！"));
                         player.sendMessage(Component.text("§6§l[CF]" + sender.getName() + "が表の予想を当てました！"));
                     }
+
                     else {
                         sender.sendMessage(Component.text("§6§l[CF]" + sender.getName() + "が裏の予想を当てました！"));
                         player.sendMessage(Component.text("§6§l[CF]" + sender.getName() + "が裏の予想を当てました！"));
                     }
+
                     ((Player)sender).playSound(((Player)sender).getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 1f, 1f);
                     ItemStack head = new  ItemStack(Material.PLAYER_HEAD);
                     SkullMeta winner2meta = (SkullMeta)head.getItemMeta();
@@ -269,12 +293,13 @@ public final class Man10Coinflip extends JavaPlugin {
                 });
             }).start();
         }
+
         if (args[0].equals("help")) {
             sender.sendMessage(
                     "§f§l＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝\n" +
                             "§6§l/cf create [金額] [heads(表) or tails(表)で\n" +
                             "§6§l部屋を作成することができます。\n" +
-                            "注意:部屋を複数立てることはできません。\n" +
+                            "§e§l注意:部屋を複数立てることはできません。\n" +
                             "§6§l/cf join [Player]で参加できます。\n" +
                             "§6§lまた募集してるところをクリックしても参加できます。\n" +
                             "§f§l＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝"
