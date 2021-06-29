@@ -287,7 +287,7 @@ public final class Man10Coinflip extends JavaPlugin {
                     inv.setItem(i + 18, new ItemStack(Material.LIME_STAINED_GLASS_PANE));
                 }
                 try {
-                    sleep(2500);
+                    sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
