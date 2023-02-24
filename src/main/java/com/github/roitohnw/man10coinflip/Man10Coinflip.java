@@ -26,13 +26,13 @@ import static java.lang.Thread.sleep;
 
 public final class Man10Coinflip extends JavaPlugin {
 
-    private Material panelColor(){
+    private Material panelColor() {
         Random random=new Random();
         int d=random.nextInt(3);
-        if(d==0){
+        if(d==0) {
             return Material.PINK_STAINED_GLASS_PANE;
         }
-        else if(d==1){
+        else if(d==1) {
             return Material.WHITE_STAINED_GLASS_PANE;
         }
         else return Material.LIME_STAINED_GLASS_PANE;
