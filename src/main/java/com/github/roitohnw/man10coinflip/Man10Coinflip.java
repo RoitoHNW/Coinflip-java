@@ -128,9 +128,9 @@ public final class Man10Coinflip extends JavaPlugin {
                 }).start();
             }
         }
-        if (args[0].equals("join")){
+        if (args[0].equals("join")) {
 
-            if (args.length !=2) {
+                if (args.length !=2) {
                 sender.sendMessage(Component.text("§e§l[CF]使い方が間違ってます"));
                 return true;
             }
@@ -143,7 +143,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 sender.sendMessage("§e§l[CF]その部屋は存在しません");
                 return true;
             }
-            if (player == sender){
+            if (player == sender) {
                 sender.sendMessage("§e§l[CF]自分の部屋には入れません");
                 return true;
             }
@@ -173,14 +173,14 @@ public final class Man10Coinflip extends JavaPlugin {
                 for (int i = 1;i<3;i++) {
                     ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                     SkullMeta meta = (SkullMeta)head.getItemMeta();
-                    if (i == 1){
+                    if (i == 1) {
                         meta.setOwningPlayer(player);
                     }
                     else {
                         meta.setOwningPlayer((Player)sender);
                     }
                     head.setItemMeta(meta);
-                    if (i == 1){
+                    if (i == 1) {
                         inv.setItem(17,head);
                     }
                     else {
@@ -291,7 +291,7 @@ public final class Man10Coinflip extends JavaPlugin {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Bukkit.getScheduler().runTask(this, new Runnable (){
+                Bukkit.getScheduler().runTask(this, new Runnable () {
                     @Override
                     public void run(){
 
@@ -321,11 +321,11 @@ public final class Man10Coinflip extends JavaPlugin {
     }
 }
 
-class GameData{
+class GameData {
     double bet;
     boolean heads;
 
-    GameData(double bet,boolean heads){
+    GameData(double bet,boolean heads) {
         this.bet=bet;
         this.heads=heads;
     }
